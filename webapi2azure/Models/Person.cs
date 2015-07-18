@@ -5,9 +5,6 @@ using System.Web;
 
 namespace webapi2azure.Models
 {
-    /**
-    TEst
-    */
     public class Person
     {
         public string Pnr { get; set; }
