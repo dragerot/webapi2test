@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using webapi2azure.Models;
 
 namespace webapi2azure.Controllers
@@ -14,7 +15,8 @@ namespace webapi2azure.Controllers
         static Dictionary<string, Person> dictionary = new Dictionary<string, Person>();
 
         // GET: api/Person/5
-        public IHttpActionResult Get(string pnr)
+        [ResponseType(typeof(Person))]
+        public IHttpActionResult GetPerson(string pnr)
         {
             if (dictionary.ContainsKey(pnr))
             {
@@ -24,15 +26,16 @@ namespace webapi2azure.Controllers
             return NotFound();
         }
 
-        public IHttpActionResult Get()
+       
+        public IHttpActionResult GetPersons()
         {
             Person[] list = dictionary.Values.ToArray();
             return Ok(list);
         }
 
         // POST: api/Person
-       
-        public IHttpActionResult Post([FromBody]Person person)
+        //[HttpPost]
+        public IHttpActionResult PostPerson([FromBody]Person person)
         {
             if (!dictionary.ContainsKey(person.Pnr))
             {
@@ -43,7 +46,7 @@ namespace webapi2azure.Controllers
         }
 
         // DELETE: api/Person/5
-        public IHttpActionResult Delete(string pnr)
+        public IHttpActionResult DeletePerson(string pnr)
         {
             if (dictionary.Remove(pnr))
             {
